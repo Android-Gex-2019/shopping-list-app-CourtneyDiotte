@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">Shopping List</string>
+    <string name="app_name">ShoppingListAssignment</string>
+    <string name="btnAddItem">Add Item</string>
+    <string name="Item1">Cherries</string>
+    <string name="Item2">Tea</string>
+    <string name="Item3">Grapes</string>
+    <string name="Item4">Apple</string>
+    <string name="Item5">Spinach</string>
+    <string name="Item6">Wine</string>
+    <string name="Item7">Eggs</string>
+    <string name="Item8">Onion</string>
+    <string name="Item9">Kale</string>
+    <string name="Item10">Bananas</string>
+    <string name="shopping_items">Shopping Items</string>
+    <string name="my_shopping_list">My Shopping List</string>
 </resources>
