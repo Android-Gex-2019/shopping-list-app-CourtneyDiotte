@@ -43,7 +43,9 @@ public class ShoppingItems extends AppCompatActivity {
         setContentView(R.layout.activity_shopping_items);
     }
 
-
+    //get the item tag, assign to shopItem
+    //add shopItem as extra in intent
+    //set result
     public void selectItem(View view) {
         Intent intent = new Intent();
         String shopItem = view.getTag().toString();

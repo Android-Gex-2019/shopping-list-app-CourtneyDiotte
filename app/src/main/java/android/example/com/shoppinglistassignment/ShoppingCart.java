@@ -38,10 +38,14 @@ public class ShoppingCart implements Serializable {
 
     private Map shoppingList = new HashMap<>();
 
+    //if the shopping list is not empty
+    // and it contains the item already
+    //add one to item count
+    //or else add the item
     protected void addItemToList(String item){
 
         if(this.shoppingList != null) {
-            
+
             if (this.shoppingList.containsKey(item)) {
                 this.shoppingList.replace(item, (int) shoppingList.get(item) + 1);
             } else {
@@ -50,6 +54,7 @@ public class ShoppingCart implements Serializable {
         }
     }
 
+    //return the shopping list
     protected Map<String, Integer> getShoppingList(){
 
         return shoppingList;

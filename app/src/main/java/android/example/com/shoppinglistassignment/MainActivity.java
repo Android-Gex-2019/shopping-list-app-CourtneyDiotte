@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int TEXT_REQUEST = 1;
     private ShoppingCart cart = new ShoppingCart();
 
+    //If there is a saved instance, assign to cart
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,19 +54,21 @@ public class MainActivity extends AppCompatActivity {
         showShoppingList();
     }
 
+    //show shopping list when app resumes
     @Override
     protected void onResume() {
         super.onResume();
         showShoppingList();
     }
 
+    //put cart in outstate
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("cart", cart);
     }
 
-
+    //If there is saved instance, assign to cart
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -77,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    //Populate map
+    //If item is not null, make visible and set text to be the value and key
     private void showShoppingList() {
 
         Iterator<Map.Entry<String, Integer>> itr = cart.getShoppingList().entrySet().iterator();
@@ -88,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             String itemId = "txtItem" + itemCount; //get item id
-            TextView shopItem = findViewById(getResources().getIdentifier(itemId, "id", getPackageName()));
+            TextView shopItem = findViewById(getResources().getIdentifier(itemId, "id", this.getPackageName()));
 
             if(shopItem != null) {
                 shopItem.setVisibility(View.VISIBLE);
@@ -99,11 +104,13 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //launch the activity
     public void StartItemList(View view) {
         Intent intent = new Intent(this, ShoppingItems.class);
         startActivityForResult(intent, TEXT_REQUEST);
     }
 
+    //add item to list if the request is the same as the class var TEXT_REQUEST
     @Override
     public void onActivityResult(int request, int result, Intent data)
     {
