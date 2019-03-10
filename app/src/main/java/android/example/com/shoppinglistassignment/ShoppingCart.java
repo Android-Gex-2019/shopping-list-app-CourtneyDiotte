@@ -34,9 +34,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+//want to persist
 public class ShoppingCart implements Serializable {
 
-    private Map shoppingList = new HashMap<>();
+    private Map shoppingList = new HashMap<>();  //using a map for the shopping list to keep track of items and item count
 
     //if the shopping list is not empty
     // and it contains the item already

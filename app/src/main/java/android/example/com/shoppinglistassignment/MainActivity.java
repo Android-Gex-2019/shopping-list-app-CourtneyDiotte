@@ -39,7 +39,8 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
 
-    public static final int TEXT_REQUEST = 1;
+    public static final int TEXT_REQUEST = 1; //to identify activity triggered
+
     private ShoppingCart cart = new ShoppingCart();
 
     //If there is a saved instance, assign to cart
@@ -54,21 +55,21 @@ public class MainActivity extends AppCompatActivity {
         showShoppingList();
     }
 
-    //show shopping list when app resumes
+    //Update view when app resumes
     @Override
     protected void onResume() {
         super.onResume();
         showShoppingList();
     }
 
-    //put cart in outstate
+    //store cart before pausing activity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("cart", cart);
     }
 
-    //If there is saved instance, assign to cart
+    //retrieve stored data
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -79,20 +80,24 @@ public class MainActivity extends AppCompatActivity {
         showShoppingList();
     }
 
-
-    //Populate map
-    //If item is not null, make visible and set text to be the value and key
+    //update view - set shop item text to be the value (num of item) and key (which item)
     private void showShoppingList() {
 
-        Iterator<Map.Entry<String, Integer>> itr = cart.getShoppingList().entrySet().iterator();
+        //iterator setup
+        Iterator<Map.Entry<String, Integer>> itr;
+        itr = cart.getShoppingList().entrySet().iterator();
 
         int itemCount = 1;
+
+        //iterate through items updating text
         while (itr.hasNext()) {
 
+            //populate mapPair
             Map.Entry<String, Integer> mapPair = itr.next();
 
+            String itemId = "txtItem" + itemCount; //for shop item id names
 
-            String itemId = "txtItem" + itemCount; //get item id
+            //find and assign textview by item id
             TextView shopItem = findViewById(getResources().getIdentifier(itemId, "id", this.getPackageName()));
 
             if(shopItem != null) {
@@ -104,25 +109,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //launch the activity
+    //onClick
+    //start the shoppingItems activity
     public void StartItemList(View view) {
         Intent intent = new Intent(this, ShoppingItems.class);
         startActivityForResult(intent, TEXT_REQUEST);
     }
 
-    //add item to list if the request is the same as the class var TEXT_REQUEST
+
+    //add item to list if the request == TEXT_REQUEST
     @Override
-    public void onActivityResult(int request, int result, Intent data)
+    public void onActivityResult(int request, int result, Intent intent)
     {
-        super.onActivityResult(request, result, data);
+        super.onActivityResult(request, result, intent);
+        //if correct activity was started
         if (request == TEXT_REQUEST)
         {
-            String item = data.getStringExtra(ShoppingItems.EXTRA_REPLY);
+            String item = intent.getStringExtra(ShoppingItems.EXTRA_REPLY); //assign shopItem name to item
+
             if(item != null) {
-                cart.addItemToList(item);
+                cart.addItemToList(item); //add it to list
             }
         }
-        showShoppingList();
+        showShoppingList(); //update the view
     }
 
 

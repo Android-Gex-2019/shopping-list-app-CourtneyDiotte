@@ -35,7 +35,7 @@ import android.view.View;
 
 public class ShoppingItems extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY= "com.example.android.shoppinglistassignment.shoppingitems.extra.REPLY";
+    public static final String EXTRA_REPLY= "activity_shopping_items.REPLY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +43,16 @@ public class ShoppingItems extends AppCompatActivity {
         setContentView(R.layout.activity_shopping_items);
     }
 
+    //onClick
     //get the item tag, assign to shopItem
-    //add shopItem as extra in intent
-    //set result
+    //add shopItem to intent
+    //result ok - return data
     public void selectItem(View view) {
         Intent intent = new Intent();
-        String shopItem = view.getTag().toString();
+        String shopItem = view.getTag().toString(); //get item tag for item name
 
-        intent.putExtra(EXTRA_REPLY, shopItem);
+        intent.putExtra(EXTRA_REPLY, shopItem); //add extra data intent (shop item name)
+
         setResult(RESULT_OK, intent);
         finish();
     }
